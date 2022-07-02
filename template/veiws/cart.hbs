@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GetArt {{title}}</title>
+    {{>header}}
+    <!-- include css files -->
+    <link rel="stylesheet" href="/css/cart.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <header>
+
+
+                    {{#if message}}
+                    <div id="msg">
+                        <i class="fa fa-times" onclick="document.getElementById('msg').style.display='none'"></i>
+                        <p>{{ message}}</p>
+                    </div>
+                    {{/if}}
+
+
+                    <!-- navigation -->
+                    <div class="navigation">
+                        <div class="hamburger">
+                            <div class=" fa fa-times ham_toggle"></div>
+                        </div>
+                        <nav>
+                            <!-- logo -->
+                            <div class="logo">
+                                <h1>Get<span>Art </span><code>{{#if user}}({{user}}){{/if}}</code></h1>
+                            </div>
+
+                            <!-- menu  -->
+                            <div class="nav" id="nav">
+                                <ul>
+
+                                    <li><a href="/"> Shop </a></li>
+                                    <li><a class="active" href="/cart">cart</a></li>
+                                    <li><a href="/admin">admin</a></li>
+                                    <li><a href="/profile">profile</a></li>
+                                    <li><a href="/logout">logout</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+
+                </header>
+
+                <div class="baner">
+                    <h2 class="main_heading">Shopping Cart Here</h2>
+                    <div class="items">
+
+
+
+
+
+                        {{#if data}}
+                        {{#each data}}
+
+                        <form action="/removeItemFromCart" method="post">
+                            <input type="hidden" name="id" value="{{this.id}}">
+                            <div class="item">
+                                <div class="img_div"
+                                    style="background-image: url('{{this.image}}'); background-size: cover;"></div>
+
+                                <div class="footer">
+                                    <h3>{{this.title}}</h3>
+
+                                    <p>{{this.variant}}</p>
+
+                                    <div class="rate_qnt">
+                                        <div>
+                                            &nbsp;<label><span><input maxlength="3" style="width: 55px;border:none;padding:4px" onclick="encreseItem(this);" type="text" name="quantity" value="{{this.quantity}}"> + </span></label>&nbsp;
+
+                                            <script>
+                                                function encreseItem(e) {
+                                                    if(e.value == ""){
+                                                        e.value = 1;
+                                                    }
+                                                    q = parseInt(e.value);
+                                                    e.value = q + 1 ;
+                                                }
+                                            </script>
+                                        </div>
+                                        <span style="color: green; font-weight:500;">₹ {{this.rate}}</span>
+                                        <button type="submit"><i
+                                                class="fa fa-trash"></i></button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="line">
+                                <hr>
+                                *
+                                <hr>
+                            </div>
+                        </form>
+                        {{/each}}
+                        {{/if}}
+
+
+
+                        {{#if data}}
+                        <button class="ptb">process to buy</button>
+                        {{/if}}
+
+                    </div>
+                    <div class="copyright">Copyright &copy; kamleen
+                        <script>document.write(new Date().getFullYear());</script>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <script src="/js/nav.js"></script>
+</body>
+
+</html>

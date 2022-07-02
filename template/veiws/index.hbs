@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GetArt {{title}}</title>
+    {{>header}}
+    <!-- include css files -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <header>
+
+
+                    {{#if message}}
+                    <div id="msg">
+                        <i class="fa fa-times" onclick="document.getElementById('msg').style.display='none'"></i>
+                        <p>{{ message}}</p>
+                    </div>
+                    {{/if}}
+
+
+                    <!-- navigation -->
+                    <div class="navigation">
+                        <div class="hamburger">
+                            <div class=" fa fa-times ham_toggle"></div>
+                        </div>
+                        <nav>
+                            <!-- logo -->
+                            <div class="logo">
+                                <h1>Get<span>Art </span><code>{{#if userName}}({{userName}}){{/if}}</code></h1>
+                            </div>
+
+                            <!-- menu  -->
+                            <div class="nav" id="nav">
+                                <ul>
+
+                                    {{#if user}}
+                                    <li><a class="active" href="/"> Shop </a></li>
+                                    <li><a href="/cart">cart</a></li>
+                                    <li><a href="/admin">admin</a></li>
+                                    <li><a href="/profile">profile</a></li>
+                                    <li><a href="/logout">logout</a></li>
+                                    {{else}}
+                                    <li><a class="active" href="/"> Shop </a></li>
+                                    <li><a href="/login"> Login </a></li>
+                                    <li><a href="/signup"> signup </a></li>
+                                    {{/if}}
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+
+                </header>
+
+                <div class="baner">
+                    <h2 class="main_heading">Shopping Here</h2>
+                    <div class="items">
+
+
+
+
+
+                        {{#if data}}
+                        {{#each data}}
+
+
+                        <div class="item">
+
+                            <div class="item_img" style="background-image: url('{{this.image}}'); background-size:cover;">
+                            </div>
+
+
+                            <div class="footer">
+
+                                <p id="isStock" class="{{this.stockStatus}}">{{this.stockStatus}}</p>
+
+                                <h3>{{this.title}}</h3>
+
+                                <div class="rate">
+                                    <i>₹ 1{{this.rate}}</i> &nbsp;
+                                    <span> ₹ {{this.rate}} </span>
+                                </div>
+
+                                <p class="description">
+                                    {{this.description}}
+                                </p>
+
+
+                                <form action="/updateIntoCart" method="post">
+                                    <input type="hidden" name="id" value="{{this.id}}">
+                                    <div class="variants">
+                                        
+                                        {{#if this.variantsTxt1}}
+                                        <label>
+                                            {{#if this.variantsImg1}}
+                                            <img src="{{this.variantsImg1}}" alt="{{this.variantsTxt1}}"> <br>
+                                            {{/if}}
+                                            <input type="radio" name="variant" value="{{this.variantsTxt1}}" required>
+                                            <span>{{this.variantsTxt1}}</span> 
+                                        </label>
+                                        {{/if}}
+
+
+                                        {{#if this.variantsTxt2}}
+                                        <label>
+                                            {{#if this.variantsImg2}}
+                                            <img src="{{this.variantsImg2}}" alt="{{this.variantsTxt2}}"> <br>
+                                            {{/if}}
+                                            <input type="radio" name="variant" value="{{this.variantsTxt2}}" required>
+                                            <span>{{this.variantsTxt2}}</span> 
+                                        </label>
+                                        {{/if}}
+
+
+                                        {{#if this.variantsTxt3}}
+                                        <label>
+                                            {{#if this.variantsImg3}}
+                                            <img src="{{this.variantsImg3}}" alt="{{this.variantsTxt3}}"> <br>
+                                            {{/if}}
+                                            <input type="radio" name="variant" value="{{this.variantsTxt3}}" required>
+                                            <span>{{this.variantsTxt3}}</span> 
+                                        </label>
+                                        {{/if}}
+
+  
+
+                                        {{#if this.variantsTxt4}}
+                                        <label>
+                                            {{#if this.variantsImg4}}
+                                            <img src="{{this.variantsImg4}}" alt="{{this.variantsTxt4}}"> <br>
+                                            {{/if}}
+                                            <input type="radio" name="variant" value="{{this.variantsTxt4}}" required>
+                                            <span>{{this.variantsTxt4}}</span> 
+                                        </label>
+                                        {{/if}}
+
+  
+                                    </div>
+
+                                    <div class="buttons">
+                                        <button class="add" type="submit">ADD TO CART</button>
+                                        <button class="buy">BUY IT NOW</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="line">
+                            <hr>
+                            *
+                            <hr>
+                        </div>
+                        {{/each}}
+                        {{/if}}
+
+
+                    </div>
+                    <div class="copyright">Copyright &copy; <a href="https://mohdkamleen.blogspot.com/" target="_blank"
+                            rel="noopener noreferrer">kamleen</a> 2020 -
+                        <script>document.write(new Date().getFullYear());</script>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <script src="/js/nav.js"></script>
+</body>
+
+</html>
